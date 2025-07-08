@@ -1,120 +1,152 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: #eceffc;
+  background-image: url("../public/6148364_3135763.jpg");
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  body {
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  margin: 0;
+}
 }
 
-.btn {
-  padding: 8px 20px;
-  border-radius: 0;
-
-  &::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      transparent,
-      var(--primary-color),
-      transparent
-    );
-    transform: translateX(-100%);
-    transition: 0.6s;
-  }
-
-  &:hover {
- 
-    box-shadow: 0 0 20px 10px hsla(204, 70%, 53%, 0.5);
-
-   
-  }
-}
-
-.login-form {
+.signupSection {
+  background: url(https://source.unsplash.com/TV2gg2kZD1o/1600x800);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 550px;
+  text-align: center;
   display: flex;
-  flex-direction: column;
-  padding: 30px 40px;
   color: white;
-  background: rgba(0, 0, 0, 0.8);
-  box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109);
+  box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
+}
 
-  h1 {
-    text-align: center;
-    margin: 0 0 24px 0;
+.info {
+  width: 45%;
+  background: rgba(20, 20, 20, .8);
+  padding: 30px 0;
+  word-wrap: normal;
+  border-right: 5px solid rgba(30, 30, 30, .8);
+  h2 {
+    padding-top: 60px;
+    font-weight: 300;
+  }
+  p {
+    font-size: 18px;
+  }
+  .icon {
+    font-size: 8em;
+    padding: 20px 0;
+    color: rgba(10, 180, 180, 1);
   }
 
-  .form-input-material {
-    margin: 12px 0;
+  img{
+    width: 210px;
+    height: 210px
   }
+}
 
-  .btn {
-    width: 100%;
-    margin: 18px 0 9px 0;
+.tokenImage{
+  width: 300px;            /* Adjust size as needed */
+  height: 200px;       /* Hides anything outside the box */  
+  border-radius: 8px;      /* Optional: rounded corners */
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;     /* Makes image fit without stretching */
+  margin: auto;
+}
+
+.text2{
+  
+  font-size: 14px;
+  color: #f8f0f0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+}
+
+.signupForm {
+  width: 80%;
+  padding: 30px 0;
+  background: rgba(20, 40, 40, .8);
+  transition: .2s;
+  h2 {
+    font-weight: 300;
   }
+}
 
-  .h3{
-    text-align: left;
+.inputFields {
+  margin: 15px 0;
+  font-size: 16px;
+  padding: 10px;
+  width: 250px;
+  border: 1px solid rgba(10, 180, 180, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: rgba(20, 20, 20, .2);
+  color: white;
+  outline: none;
+}
+
+.inputFields2 {
+  margin: 15px 0;
+  font-size: 16px;
+  padding: 10px;
+  width: 150px;
+  border: 1px solid rgba(10, 180, 180, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: rgba(20, 20, 20, .2);
+  color: white;
+  outline: none;
+}
+
+.noBullet {
+  list-style-type: none;
+  padding: 0;
+}
+
+.upload{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white; /* Green */
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+#join-btn {
+  border: 1px solid rgba(10, 180, 180, 1);
+  background: rgba(20, 20, 20, .6);
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: .4s;
+  &:hover {
+    background: rgba(20, 20, 20, .8);
+    padding: 10px 80px;
   }
-
-  .check {
-    font-size: 30px;
-   border: 1px outset blue;
-   background-color: lightBlue;
-   height:100px;
-   width:150px;
-   border-radius: 50%;
-   cursor:pointer;
 }
 
-.data{
-  margin-top: -220px;
-  margin-left: 200px;
-  background-color:  white;
-   height:220px;
-   width:400px;
-
-   background-color: #f9f9f9;     /* Light background */
-  color: #333;                   /* Dark text for readability */
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  white-space: pre-wrap;         /* Preserves line breaks and wraps */
-  word-wrap: break-word;         /* Prevents text overflow */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
-  font-family: monospace; 
-  overflow: auto;                /* Scroll when content overflows */
-  padding: 10px;                 /* Add space inside the box */
-  box-sizing: border-box; 
-}
-
-.image {
-  width: 100%;         /* Makes image fill the div */
-  height: auto;
-  display: block;
-  object-fit: contain;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.tokenId{
-  width: 180px;
-}
-
-.download {
-  margin-top: -30px;
-  margin-left: 630px;
-  font-size: 10px;
-   border: 1px outset blue;
-   background-color: lightBlue;
-   height:30px;
-   width:80px;
-   cursor:pointer;
-}
-
-
-
-}

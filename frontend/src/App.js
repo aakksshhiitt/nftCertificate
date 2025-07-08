@@ -7,8 +7,9 @@ const ethers=require("ethers");
 
 function App() {
 
-  var contractAddress, abi,contractProvider,contractSigner, receiverAddress, name, date, course, tokenId, image, tokenURI, imageURL;
-  var JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIyNjgyZjY0ZS1kYzUyLTQzOGEtYjgxZC0wMTRiZjdjNjJiMTYiLCJlbWFpbCI6Im1haWxha3NoaXRoZXJlQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIwMWExZGFjNDQyYjVkMjM5MWRmMSIsInNjb3BlZEtleVNlY3JldCI6IjU0MWRmMGYyNDYxYzU1MzFjYWQyNTcxNzkzYzRkYTZkN2M2MDM0NmNkOWQ3MTRjZDA4YjkzN2U1Y2E2NWZjZDciLCJleHAiOjE3ODI5OTg4Mjh9.Rc9J9O540bUheD5blam4NhOFt-sIl4zuCCGnDH7SKMk";
+	// console.log("app");
+  let contractAddress, abi,contractProvider,contractSigner, receiverAddress, name, date, course, tokenId, image, tokenURI, imageURL,initializer;
+  let JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIyNjgyZjY0ZS1kYzUyLTQzOGEtYjgxZC0wMTRiZjdjNjJiMTYiLCJlbWFpbCI6Im1haWxha3NoaXRoZXJlQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIwMWExZGFjNDQyYjVkMjM5MWRmMSIsInNjb3BlZEtleVNlY3JldCI6IjU0MWRmMGYyNDYxYzU1MzFjYWQyNTcxNzkzYzRkYTZkN2M2MDM0NmNkOWQ3MTRjZDA4YjkzN2U1Y2E2NWZjZDciLCJleHAiOjE3ODI5OTg4Mjh9.Rc9J9O540bUheD5blam4NhOFt-sIl4zuCCGnDH7SKMk";
 
   var data={
     tokenId:0,
@@ -21,9 +22,10 @@ function App() {
   }
 
   useEffect(()=>{
+	// console.log("useEffect");
 
-    const initializer=async()=>{
-
+    initializer=async()=>{
+		// console.log("initializer");
       contractAddress="0x5a0dfeA1214C3e78608Cc98b6740e590F2e1f6ab";
       abi=[
 	{
@@ -599,7 +601,7 @@ function App() {
 		"type": "function"
 	}];
 
-      if(!window.ethereum){
+      if(await !window.ethereum){
         alert("Install Metamask");
         return;
       }
@@ -616,7 +618,10 @@ function App() {
         contractSigner= await new ethers.Contract(contractAddress, abi, signer);
 
         // const name= await contractSigner.name();
-        // console.log(name);
+        // console.log("ready");
+		// console.log(contractProvider);
+		// console.log(contractSigner);
+		// console.log(contractAddress);
       }
       catch(err){
         if(err.code===-32002){
@@ -664,6 +669,12 @@ function App() {
 
 
 		try{
+
+			initializer();
+			if (!contractSigner) {
+    			alert("Contract is still loading. Please refrest the page and try agian.");
+    			return;
+  			}
 			if(receiverAddress==undefined|| name==undefined || course==undefined || date==undefined){
 				document.querySelector(".details").innerText = "Please fill all the details";
 				return;
@@ -674,6 +685,7 @@ function App() {
 			}		
 
 
+			console.log(contractSigner);
 			const formData= new FormData(); // creating new form to store the image details.
 			formData.append("file", image); // adding image data to file
 
@@ -702,6 +714,9 @@ function App() {
 
 
 			await contractSigner.mintMyNFT(receiverAddress,name, tokenURI, course, date);
+
+			const tokenId=await contractSigner.tokenId();
+			document.querySelector(".details").innerHTML=`Your TokenId is: ${tokenId}`
 		}
 		catch(err){
 			let errorMessage = "An unexpected error occurred.";
@@ -737,9 +752,13 @@ function App() {
         	data.CourseName= result[4];
         	data.Date=result[5];
         	data.Minter=result[6];
-
-			document.querySelector(".image").src = "";
-        	document.querySelector(".details").innerText=JSON.stringify(data, null, 2);
+			if (document.querySelector(".downloadBtn")) {
+				document.querySelector(".downloadBtn").remove();
+			}
+			document.querySelector(".tokenImage").style.display = "none";
+			document.querySelector(".details").innerText="";
+        	document.querySelector(".text2").innerText=JSON.stringify(data, null, 2);
+			document.querySelector(".text1").innerText="Token Details";
         	// console.log(data);
         }
       	catch(err){
@@ -772,9 +791,27 @@ function App() {
 			const urlData = await axios.get(url);
 
 			imageURL= urlData.data.image.replace("ipfs://","https://ipfs.io/ipfs/");
+			// console.log(imageURL)
 
-			document.querySelector(".details").innerText = "";
-			document.querySelector(".image").src = imageURL;
+			document.querySelector(".text1").innerText = "This is your NFT image";
+			document.querySelector(".tokenImage").style.display = "block";
+			document.querySelector(".tokenImage").src = imageURL;
+			document.querySelector(".text2").innerText = "";
+			document.querySelector(".details").innerText="";
+
+			if (!document.querySelector(".downloadBtn")) {
+    			const btn = document.createElement("button");
+    			btn.innerText = "Download Image";
+    			btn.className = "downloadBtn";
+
+    			// Optional: Add click functionality
+    			btn.onclick = () => {
+					download();
+    			};
+
+    			// Append button to container or wherever you want
+    			document.querySelector(".info").appendChild(btn);
+  			}
 
         }
         catch(err){
@@ -797,7 +834,7 @@ function App() {
 		try{
 
 			if(imageURL==undefined){
-				console.log("Please view the image first and then download");
+				document.querySelector(".details").innerText = ("Please view the image first and then download");
 				return;
 			}
 
@@ -824,8 +861,8 @@ function App() {
 			
   		} 
 		catch (err) {
-    	console.error("Download error:", err);
-    	document.querySelector(".details").innerText = "Error downloading image.";
+    		console.error("Download error:", err);
+    		document.querySelector(".details").innerText = "There is some error in downloading the image.";
   		}
 	}
 
@@ -836,34 +873,49 @@ function App() {
 
 
 
-  return (
-    <div><div className="login-form">
-  <h1>NFT Certificate</h1>
-  <div className="form-input-material">
-     <label >Mint NFT Certificate</label><br></br>
-    <input type="text" placeholder="Recepient Address" onChange={handleChange1} required />
-    <input type="text" placeholder="Name" onChange={handleChange2} required />
-    <input type="text" placeholder="Event Name" onChange={handleChange3} required />
-    <input type="text" placeholder="Date" onChange={handleChange4} required /><br></br><br></br>
-    <label >Upload CertificateNFT</label><br></br>
-    <input type="file" accept="image/*" onChange={handleChange6} required/>
-   
+return (
+<div className="signupSection">
+  <div className="info">
+    <h2 className='text1'>MINT </h2>
+    <img src="1.png" className='tokenImage'></img>
+    <p className='text2'>Your NFT Certificate</p>
   </div>
-  <button className="btn btn-primary" onClick={mint}>Mint NFT</button>
-  </div>
-
-  <div className="login-form">
-  <h3>Check NFT Details</h3>
-  <input type="text" className="tokenId" size="20" placeholder="Token Id" onChange={handleChange5} required /><br></br>
-  <button className="check" onClick={checkDetails}>check details</button> <br></br>
-  <button className="check" onClick={checkImage}>check image</button>
-  <div className='data'><img className="image" /><pre className="details"></pre></div>
-  <button className="download"onClick={download}>Downlaod</button>
   
-  
+  <form  className="signupForm">
+      <li>
+        <label></label>
+        <input type="text" className="inputFields"placeholder="Receiver's Address" onChange={handleChange1} required/>
+      </li>
+      <li>
+        <label ></label>
+        <input  className="inputFields" placeholder="Name" onChange={handleChange2} required/>
+      </li>
+      <li>
+        <label></label>
+        <input type="text" className="inputFields" placeholder="Event" onChange={handleChange3} required/>
+      </li>
+	  <li>
+        <label></label>
+        <input type="text" className="inputFields" placeholder="date" onChange={handleChange4} required/>
+      </li>
+	
+        <br></br><input type="file" accept="image/*"  className='upload' onChange={handleChange6} required/><br></br>
+      
+        <input type="button" id="join-btn" name="join" alt="Join" value="Mint" onClick={mint}></input><br></br>
 
-</div></div>
-  );
+		<input type="button" id="join-btn" name="join" alt="Join" value="Details" onClick={checkDetails} ></input>
+		 <input type="text" className="inputFields2" placeholder="Enter Token Id" onChange={handleChange5}/>
+		 <input type="button" id="join-btn" name="join" alt="Join" value="Image" onClick={checkImage}></input>
+		 <p className='details'></p>
+
+  </form>
+</div>
+
+
+
+);
+
+
 }
 
 
