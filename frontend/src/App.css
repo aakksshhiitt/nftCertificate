@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 * {
   font-family: 'Open Sans', sans-serif;
 }
@@ -19,6 +20,11 @@ body {
 }
 }
 
+.nav{
+  margin-top: -10px;
+  margin-left: 550px;
+}
+
 .signupSection {
   background: url(https://source.unsplash.com/TV2gg2kZD1o/1600x800);
   background-repeat: no-repeat;
@@ -34,7 +40,37 @@ body {
   box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
 }
 
+
+
 .info {
+  width: 45%;
+  overflow-y: auto;            /* Vertical scrollbar if content overflows */
+  overflow-x: auto;
+  background: rgba(20, 20, 20, .8);
+  padding: 30px 0;
+  word-wrap: normal;
+  border-right: 5px solid rgba(30, 30, 30, .8);
+  h2 {
+    padding-top: 60px;
+    font-weight: 300;
+  }
+  p {
+    font-size: 18px;
+  }
+  .icon {
+    font-size: 8em;
+    padding: 20px 0;
+    color: rgba(10, 180, 180, 1);
+  }
+
+  img{
+    width: 210px;
+    height: 210px;
+    position: center;
+  }
+}
+
+.info2 {
   width: 45%;
   background: rgba(20, 20, 20, .8);
   padding: 30px 0;
@@ -55,20 +91,15 @@ body {
 
   img{
     width: 210px;
-    height: 210px
+    height: 210px;
+    position: center;
   }
 }
 
-.tokenImage{
-  width: 300px;            /* Adjust size as needed */
-  height: 200px;       /* Hides anything outside the box */  
-  border-radius: 8px;      /* Optional: rounded corners */
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;     /* Makes image fit without stretching */
-  margin: auto;
+
+.tokenImage1{
+   /* Makes image fit without stretching */
+  margin:0 auto;
 }
 
 .text2{
@@ -86,6 +117,23 @@ body {
   padding: 30px 0;
   background: rgba(20, 40, 40, .8);
   transition: .2s;
+  h2 {
+    font-weight: 300;
+  }
+}
+
+.signupForm2 {
+  padding: 40px;
+  background: #121212;
+  border: 40px solid;
+  border-image: linear-gradient(45deg, #040404, #454345, #e4e7e5) 1;
+  border-radius: 12px;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  width: 85%;
+  padding: 30px 0;
+  background: rgba(20, 40, 40, .8);
+  transition: 2s;
   h2 {
     font-weight: 300;
   }
@@ -119,6 +167,43 @@ body {
   outline: none;
 }
 
+.inputFields3 {
+  margin: 15px 0;
+  font-size: 16px;
+  padding: 10px;
+  width: 90px;
+  border: 1px solid rgba(10, 180, 180, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: rgba(20, 20, 20, .2);
+  color: white;
+  outline: none;
+}
+
+label {
+ 
+  background: rgba(20, 30, 48, 0.7); /* semi-transparent dark bg */
+  color: #f1f6f6; /* neon cyan */
+  
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  margin-bottom: 10px;
+  letter-spacing: 0.6px;
+  backdrop-filter: blur(4px); /* optional, for glassy effect */
+  transition: all 0.3s ease-in-out;
+}
+
+input:hover {
+  background: rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 10px #464949, 0 0 20px rgba(0, 255, 255, 0.4);
+  transform: scale(1.02);
+}
+
+
+
 .noBullet {
   list-style-type: none;
   padding: 0;
@@ -135,7 +220,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-#join-btn {
+.join-btn {
   border: 1px solid rgba(10, 180, 180, 1);
   background: rgba(20, 20, 20, .6);
   font-size: 18px;
@@ -149,4 +234,64 @@ body {
     padding: 10px 80px;
   }
 }
+.join-btn1 {
+  width:60px;
+  border: 1px solid rgba(10, 180, 180, 1);
+  background: rgba(20, 20, 20, .6);
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: .4s;
+  &:hover {
+    background: rgba(20, 20, 20, .8);
+    padding: 10px 80px;
+  }
+}
+
+.dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 120px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 10px;
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .dropdown-content button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 5px;
+      background-color: #e7e7e7;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropdown-content button:hover {
+      background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-button {
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    .chain{
+      margin-top: -70px;
+      margin-left: 20px;
+    }
+
+
 
